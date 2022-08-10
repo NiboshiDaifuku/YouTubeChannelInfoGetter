@@ -11,7 +11,7 @@ export default function App() {
       <h1>YouTubeの動画情報一括取得ツール</h1>
       <h3>好きなチャンネルの動画のサムネイル・タイトル・URLを一括で取得できます</h3>
       <InputTextBox setVideoInfo={setVideoInfo} />
-      <h2>使い方</h2>
+      <h2>使い方（PC）</h2>
       <ol>
         <li>好きなYouTubeチャンネルにアクセスする</li>
         <li>動画タブを開く</li>

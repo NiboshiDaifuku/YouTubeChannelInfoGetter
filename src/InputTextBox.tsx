@@ -1,21 +1,38 @@
 import { useState } from "react";
-import { getVideoInfo } from "./ParserLib";
+import { getVideoInfo, makeCsv } from "./ParserLib";
 
 const InputTextBox = (props) => {
   const [inputText, setText] = useState("");
-  let videoInfoArray;
+  const [videoInfoArray, setVideoInfoArray] = useState([]);
 
-  const onClickParseStart = () => {
-    videoInfoArray = getVideoInfo(inputText);
-    console.log(videoInfoArray);
-    props.setVideoInfo(videoInfoArray);
+  const startParse = () => {
+    if (inputText !== "") {
+      setVideoInfoArray(getVideoInfo(inputText));
+      props.setVideoInfo(videoInfoArray);
+    }
+  };
+
+  const downloadCsv = () => {
+    if (videoInfoArray.length > 0) {
+      const outputCsv = makeCsv(videoInfoArray);
+
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([outputCsv], { type: "text/csv" }));
+      a.download = "YouTubeChannelVideoInfo.csv";
+
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
   };
 
   return (
     <div className="input-text-box">
       <textarea cols="50" rows="5" onChange={(e) => setText(e.currentTarget.value)} />
       <p>
-        <button onClick={onClickParseStart}>解析開始</button>
+        <button onClick={startParse}>解析開始</button>　
+        <button onClick={downloadCsv}>CSVダウンロード</button>
       </p>
     </div>
   );

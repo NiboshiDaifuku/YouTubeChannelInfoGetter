@@ -16,7 +16,7 @@ export interface videoInfoArray {
 }
 
 export const getVideoInfo = (analysisTarget: string) => {
-  const thumbArray = divideTarget(analysisTarget, /src=.*jpg/g, 'src="');
+  const thumbArray = divideTarget(analysisTarget, /src=.*\.jpg/g, 'src="');
   const infoArray = divideTarget(
     analysisTarget,
     /id="video-title".*?">/g,
@@ -48,4 +48,13 @@ export const getVideoInfo = (analysisTarget: string) => {
   }
 
   return videoInfo;
+};
+
+export const makeCsv = (videoInfoArray: videoInfoArray[]) => {
+  let outputCsv = "ID,サムネイル,タイトル,URL\n";
+  videoInfoArray.forEach((e, idx) => {
+    outputCsv += idx + 1 + "," + e.thumbnail + "," + e.title + "," + e.url + "\n";
+  });
+
+  return outputCsv;
 };

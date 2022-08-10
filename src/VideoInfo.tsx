@@ -2,7 +2,7 @@ const VideoInfo = (props) => {
   return (
     <tr>
       <td>
-        <img src={props.thumbnail} alt="" width="90" />
+        <img src={props.thumbnail} alt="" width="80" />
       </td>
       <td align="center">{props.id + 1}</td>
       <td>
