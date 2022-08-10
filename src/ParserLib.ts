@@ -8,6 +8,13 @@ export const getVideoThumbnail = (analysisTarget: string) => {
   return divideTarget(analysisTarget, /src=.*jpg/g, 'src="');
 };
 
+// 回答履歴
+export interface videoInfoArray {
+  thumbnail: string;
+  title: string;
+  url: string;
+}
+
 export const getVideoInfo = (analysisTarget: string) => {
   const thumbArray = divideTarget(analysisTarget, /src=.*jpg/g, 'src="');
   const infoArray = divideTarget(
@@ -22,10 +29,10 @@ export const getVideoInfo = (analysisTarget: string) => {
 
   infoArray.forEach((info: string) => {
     titleArray.push(divideTarget(info, /title=".*?"/g, 'title="')[0]);
-    urlArrayWithAmp.push(divideTarget(info, /href=".*?"/g, 'href="')[0]);
+    urlArrayWithAmp.push(divideTarget(info, /href=".*?"/g, 'href="/watch?v=')[0]);
   });
 
-  const youTubeUrlHeader = "https://www.youtube.com";
+  const youTubeUrlHeader = "https://youtu.be/";
 
   urlArrayWithAmp.forEach((url: string) => {
     if (url.indexOf("&amp;") !== -1) {
@@ -34,5 +41,11 @@ export const getVideoInfo = (analysisTarget: string) => {
       urlArray.push(youTubeUrlHeader + url);
     }
   });
-  return { titleArray: titleArray, urlArray: urlArray, thumbArray: thumbArray };
+
+  const videoInfo: videoInfoArray[] = [];
+  for (let i = 0; i < titleArray.length; ++i) {
+    videoInfo.push({ thumbnail: thumbArray[i], title: titleArray[i], url: urlArray[i] });
+  }
+
+  return videoInfo;
 };

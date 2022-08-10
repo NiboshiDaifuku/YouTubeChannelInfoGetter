@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputTextBox from "./InputTextBox";
+import VideoInfos from "./VideoInfos";
 import "./styles.css";
 
 export default function App() {
@@ -21,7 +22,8 @@ export default function App() {
         <li>解析開始ボタンを押す</li>
         <li>csvファイルが出力されるので自由に使う</li>
       </ol>
-      {/*<VideoInfo videoInfo={videoInfo} />*/}
+      <hr />
+      {<VideoInfos videoInfo={videoInfo} />}
     </div>
   );
 }
