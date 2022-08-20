@@ -23,7 +23,7 @@ export default function App() {
           <li>{`<div id="items" class="style-scope ytd-grid-renderer">`}</li>
         </ul>
         <li>テキストボックスに張り付ける</li>
-        <li>解析開始ボタンを押す（※2回押さないと動かないときがある）</li>
+        <li>解析開始ボタンを押す</li>
         <li>csvファイルが出力されるので自由に使う</li>
       </ol>
       <hr />

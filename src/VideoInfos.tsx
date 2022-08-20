@@ -1,7 +1,7 @@
 import VideoInfo from "./VideoInfo";
 
-const VideoInfos = (props) => {
-  const info = props.videoInfo.map((e, idx) => (
+const VideoInfos = ({ videoInfo }) => {
+  const info = videoInfo.map((e, idx) => (
     <VideoInfo key={e.url} thumbnail={e.thumbnail} title={e.title} url={e.url} id={idx} />
   ));
 

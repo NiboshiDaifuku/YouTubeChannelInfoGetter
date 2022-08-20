@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { getVideoInfo, makeCsv } from "./ParserLib";
 
-const InputTextBox = (props) => {
+const InputTextBox = ({ setVideoInfo }) => {
   const [inputText, setText] = useState("");
   const [videoInfoArray, setVideoInfoArray] = useState([]);
 
   const startParse = () => {
     if (inputText !== "") {
-      setVideoInfoArray(getVideoInfo(inputText));
-      props.setVideoInfo(videoInfoArray);
+      const tmpVideoInfoArray = getVideoInfo(inputText);
+      setVideoInfoArray(tmpVideoInfoArray);
+      setVideoInfo(tmpVideoInfoArray);
     }
   };
 
